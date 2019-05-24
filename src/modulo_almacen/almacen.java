@@ -5,7 +5,7 @@
  */
 package modulo_almacen;
 
-import java.awt.Frame;
+import clases.cambiar_color;
 
 
 
@@ -18,7 +18,7 @@ public class almacen extends javax.swing.JFrame {
     /**
      * Creates new form almacen
      */
-    
+    cambiar_color cc = new cambiar_color();
     lista_productos lp = new lista_productos();
     agregar_producto ag = new agregar_producto();
     
@@ -209,6 +209,8 @@ public class almacen extends javax.swing.JFrame {
         lp.setVisible(true);
         lp.setAlwaysOnTop(true);
         ag.hide();
+        cc.color_boton_verde(ver_lista);
+        cc.color_boton_gris(nuevo_prod);
     }//GEN-LAST:event_ver_listaActionPerformed
 
     private void nuevo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevo_prodActionPerformed
@@ -217,6 +219,8 @@ public class almacen extends javax.swing.JFrame {
         ag.setAlwaysOnTop(true);
         ag.setVisible(true);
         lp.hide();
+        cc.color_boton_verde(nuevo_prod);
+        cc.color_boton_gris(ver_lista);
     }//GEN-LAST:event_nuevo_prodActionPerformed
 
     /**
