@@ -10,7 +10,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import modulo_almacen.lista_productos;
+import modulo_almacen.ver_productos;
 
 /**
  *
@@ -18,7 +18,7 @@ import modulo_almacen.lista_productos;
  */
 
 public class modificadores_tabla extends JTable {
-lista_productos lp = new lista_productos();
+ver_productos lp = new ver_productos();
     public Component prepareRendert(TableCellRenderer renderer, int rowIndex, int columnIndex) {
         Component component = super.prepareRenderer(renderer, rowIndex, columnIndex);
 

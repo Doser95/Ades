@@ -15,7 +15,6 @@ public class rellenos_combobox {
     
     public void tipos_productos_busqueda (JComboBox cb){
         
-        cb.addItem("Todo");
         cb.addItem("Abatelenguas");
         cb.addItem("Aceites");
         cb.addItem("Agujas Hipodermicas");

@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,8 +29,7 @@ import static registro_login.Registro.pass;
 import modulo_ventanilla.Ventanilla;
 import modulo_almacen.agregar_producto;
 import modulo_almacen.almacen;
-import modulo_almacen.lista_productos;
-import static modulo_almacen.lista_productos.tabla1;
+import modulo_almacen.ver_productos;
 
 /**
  *
@@ -47,7 +47,7 @@ public class metodos_especifico_11NO_TOCAR11 {
             almacen al = new almacen();
             al.setLocationRelativeTo(null);
             al.setVisible(true);
-            al.setAlwaysOnTop(true);
+            
             al.n_usuario.setText(user.getText());
         } else {
             if (c == 2) {
@@ -57,7 +57,7 @@ public class metodos_especifico_11NO_TOCAR11 {
                     Ventanilla al = new Ventanilla();
                     al.setLocationRelativeTo(null);
                     al.setVisible(true);
-                    al.setAlwaysOnTop(true);
+                    
                     al.n_usuario.setText(user.getText());
                 }
             }
@@ -108,7 +108,7 @@ public class metodos_especifico_11NO_TOCAR11 {
     //Almacen/Agregar producto
     public void verificar_id() {
 
-        int n1 = lista_productos.tabla1.getRowCount();
+        int n1 = ver_productos.tabla1.getRowCount();
         String num = String.valueOf(n1 + 1);
        
         agregar_producto.idLabel.setText(num);
@@ -176,14 +176,14 @@ public class metodos_especifico_11NO_TOCAR11 {
     }
     //Busqueda al escribir
     //utilizando keyListener se realiza Query a db utilizando like '%example%'
-    public void busqueda_al_escribir(JTextField cpm, JTable tb) {
+    public void busqueda_al_escribir(JTextField cpm, JTable tb, JComboBox cb) {
         cpm.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (Character.isLetterOrDigit(c) || !Character.isLetterOrDigit(c)) {
-                    String como = lista_productos.filtro_cb.getSelectedItem().toString();
+                    String como = cb.getSelectedItem().toString();
                     String code = null;
-                    String texto = lista_productos.texto_tb.getText();
+                    String texto = cpm.getText();
                     if (como.equalsIgnoreCase("Todo")) {
                         code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where nombre_prod like '%" + texto + "%'";
                     } else {

@@ -19,8 +19,8 @@ public class almacen extends javax.swing.JFrame {
      * Creates new form almacen
      */
     cambiar_color cc = new cambiar_color();
-    lista_productos lp = new lista_productos();
-    agregar_producto ag = new agregar_producto();
+    ver_productos p = new ver_productos();
+    añadir_prod ag = new añadir_prod();
     
     public almacen() {
         initComponents();     
@@ -45,7 +45,7 @@ public class almacen extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         ver_lista = new javax.swing.JButton();
         nuevo_prod = new javax.swing.JButton();
-        panel_contenedor = new javax.swing.JPanel();
+        panel_contenedor = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -142,13 +142,11 @@ public class almacen extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panel_contenedor.setBackground(new java.awt.Color(204, 204, 204));
-
         javax.swing.GroupLayout panel_contenedorLayout = new javax.swing.GroupLayout(panel_contenedor);
         panel_contenedor.setLayout(panel_contenedorLayout);
         panel_contenedorLayout.setHorizontalGroup(
             panel_contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1288, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panel_contenedorLayout.setVerticalGroup(
             panel_contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +166,7 @@ public class almacen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panel_contenedor))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,7 +178,7 @@ public class almacen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panel_contenedor)
                 .addContainerGap())
         );
 
@@ -205,20 +203,20 @@ public class almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void ver_listaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_listaActionPerformed
-        lp.setLocationRelativeTo(panel_contenedor);
+        /*lp.setLocationRelativeTo(panel_contenedor);
         lp.setVisible(true);
-        lp.setAlwaysOnTop(true);
-        ag.hide();
+        lp.setAlwaysOnTop(true);*/
+        ag.dispose();
+        panel_contenedor.add(p);
+        p.setVisible(true);              
         cc.color_boton_verde(ver_lista);
         cc.color_boton_gris(nuevo_prod);
     }//GEN-LAST:event_ver_listaActionPerformed
 
     private void nuevo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevo_prodActionPerformed
-
-        ag.setLocationRelativeTo(panel_contenedor);
-        ag.setAlwaysOnTop(true);
-        ag.setVisible(true);
-        lp.hide();
+        p.dispose();
+        panel_contenedor.add(ag);
+        ag.setVisible(true);              
         cc.color_boton_verde(nuevo_prod);
         cc.color_boton_gris(ver_lista);
     }//GEN-LAST:event_nuevo_prodActionPerformed
@@ -265,7 +263,7 @@ public class almacen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel n_usuario;
     private javax.swing.JButton nuevo_prod;
-    private javax.swing.JPanel panel_contenedor;
+    private javax.swing.JDesktopPane panel_contenedor;
     private javax.swing.JPanel panel_encabezado;
     private javax.swing.JButton salir;
     private javax.swing.JButton ver_lista;
