@@ -24,7 +24,7 @@ public class almacen extends javax.swing.JFrame {
     
     public almacen() {
         initComponents();     
-        
+        mostrar_productos();
     }
 
     /**
@@ -196,7 +196,13 @@ public class almacen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    public void mostrar_productos(){
+        
+        panel_contenedor.add(p);
+        p.setVisible(true);              
+        cc.color_boton_verde(ver_lista);
+        cc.color_boton_gris(nuevo_prod);
+    }
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
         
         System.exit(0);
@@ -211,6 +217,7 @@ public class almacen extends javax.swing.JFrame {
         p.setVisible(true);              
         cc.color_boton_verde(ver_lista);
         cc.color_boton_gris(nuevo_prod);
+        
     }//GEN-LAST:event_ver_listaActionPerformed
 
     private void nuevo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevo_prodActionPerformed

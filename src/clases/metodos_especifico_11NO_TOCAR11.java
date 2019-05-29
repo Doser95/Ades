@@ -29,6 +29,7 @@ import static registro_login.Registro.pass;
 import modulo_ventanilla.Ventanilla;
 import modulo_almacen.agregar_producto;
 import modulo_almacen.almacen;
+import modulo_almacen.añadir_prod;
 import modulo_almacen.ver_productos;
 
 /**
@@ -111,7 +112,7 @@ public class metodos_especifico_11NO_TOCAR11 {
         int n1 = ver_productos.tabla1.getRowCount();
         String num = String.valueOf(n1 + 1);
        
-        agregar_producto.idLabel.setText(num);
+        añadir_prod.idLabel.setText(num);
 
     }
 
