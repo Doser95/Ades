@@ -15,7 +15,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author l
@@ -25,12 +24,11 @@ public class ver_productos extends javax.swing.JInternalFrame {
     /**
      * Creates new form ver_productos
      */
-    
     conexion cn = new conexion();
     Connection con = cn.conectar();
     rellenos_combobox rc = new rellenos_combobox();
     metodos_especifico_11NO_TOCAR11 me = new metodos_especifico_11NO_TOCAR11();
-    
+
     public ver_productos() {
         initComponents();
         filtro_cb.addItem("Todo");
@@ -41,8 +39,15 @@ public class ver_productos extends javax.swing.JInternalFrame {
     }
 
     public void mostrar_tabla() {
-
+        String query = "";
         DefaultTableModel nm = new DefaultTableModel();
+        if (tipo.getSelectedIndex() == 0) {
+
+        } else {
+            if (tipo.getSelectedIndex() == 1) {
+                query = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos";
+            }
+        }
         nm.addColumn("Nombre del producto");
         nm.addColumn("Tipo");
         nm.addColumn("Clave");
@@ -50,13 +55,14 @@ public class ver_productos extends javax.swing.JInternalFrame {
         nm.addColumn("Existencia");
         nm.addColumn("Stock maximo");
         nm.addColumn("Localización");
-        
+
         tabla1.setModel(nm);
 
         String var[] = new String[7];
         try {
+
             Statement ps = con.createStatement();
-            ResultSet rs = ps.executeQuery("select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos");
+            ResultSet rs = ps.executeQuery(query);
             while (rs.next()) {
                 var[0] = rs.getString(1);
                 var[1] = rs.getString(2);
@@ -74,7 +80,7 @@ public class ver_productos extends javax.swing.JInternalFrame {
             java.util.logging.Logger.getLogger(ver_productos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +96,8 @@ public class ver_productos extends javax.swing.JInternalFrame {
         filtro_cb = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        tipo = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setFrameIcon(null);
@@ -106,6 +114,10 @@ public class ver_productos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tabla1);
 
+        jLabel1.setText("Tipo:");
+
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Material", "Medicamentos" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,8 +127,12 @@ public class ver_productos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1215, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(filtro_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(texto_tb, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -129,10 +145,12 @@ public class ver_productos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(filtro_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(texto_tb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(texto_tb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,10 +170,12 @@ public class ver_productos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JComboBox<String> filtro_cb;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable tabla1;
     public static javax.swing.JTextField texto_tb;
+    private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }

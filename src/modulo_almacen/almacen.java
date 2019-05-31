@@ -212,7 +212,8 @@ public class almacen extends javax.swing.JFrame {
         /*lp.setLocationRelativeTo(panel_contenedor);
         lp.setVisible(true);
         lp.setAlwaysOnTop(true);*/
-        ag.dispose();
+        
+        panel_contenedor.remove(ag);
         panel_contenedor.add(p);
         p.setVisible(true);              
         cc.color_boton_verde(ver_lista);
@@ -221,7 +222,8 @@ public class almacen extends javax.swing.JFrame {
     }//GEN-LAST:event_ver_listaActionPerformed
 
     private void nuevo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevo_prodActionPerformed
-        p.dispose();
+       
+        panel_contenedor.remove(p);
         panel_contenedor.add(ag);
         ag.setVisible(true);              
         cc.color_boton_verde(nuevo_prod);

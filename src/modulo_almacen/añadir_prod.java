@@ -228,9 +228,9 @@ public class añadir_prod extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31))
         );
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Agregar");
 
-        jButton2.setText("jButton1");
+        jButton2.setText("Limpiar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
