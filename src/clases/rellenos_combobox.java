@@ -13,7 +13,7 @@ import javax.swing.JComboBox;
  */
 public class rellenos_combobox {
     
-    public void tipos_productos_busqueda (JComboBox cb){
+    public void tipos_productos_busqueda_material (JComboBox cb){
         
         cb.addItem("Abatelenguas");
         cb.addItem("Aceites");
@@ -54,6 +54,11 @@ public class rellenos_combobox {
         cb.addItem("Tubos");
         cb.addItem("Vendas");
   
+    }
+    
+    public void tipos_productos_busqueda_medicamentos(JComboBox cb){
+        cb.addItem("Controlado");
+        cb.addItem("No controlado");
     }
     
 }

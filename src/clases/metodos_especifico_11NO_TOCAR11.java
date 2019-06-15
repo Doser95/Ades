@@ -27,7 +27,6 @@ import static registro_login.Login.user;
 import registro_login.Registro;
 import static registro_login.Registro.pass;
 import modulo_ventanilla.Ventanilla;
-import modulo_almacen.agregar_producto;
 import modulo_almacen.almacen;
 import modulo_almacen.añadir_prod;
 import modulo_almacen.ver_productos;
@@ -177,18 +176,19 @@ public class metodos_especifico_11NO_TOCAR11 {
     }
     //Busqueda al escribir
     //utilizando keyListener se realiza Query a db utilizando like '%example%'
-    public void busqueda_al_escribir(JTextField cpm, JTable tb, JComboBox cb) {
+    public void busqueda_al_escribir(JTextField cpm, JTable tb, JComboBox cb, JComboBox cv) {
         cpm.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (Character.isLetterOrDigit(c) || !Character.isLetterOrDigit(c)) {
-                    String como = cb.getSelectedItem().toString();
+                    Integer comodin1 = cv.getSelectedIndex();
+                    String comodin2 = cb.getSelectedItem().toString();                
                     String code = null;
                     String texto = cpm.getText();
-                    if (como.equalsIgnoreCase("Todo")) {
+                    if (comodin1 == 0  && comodin2.equalsIgnoreCase("Todo")) {
                         code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where nombre_prod like '%" + texto + "%'";
                     } else {
-                        code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where tipo = '" + como + "' and nombre_prod like '%" + texto + "%'";
+                        code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where tipo = '" + comodin2 + "' and nombre_prod like '%" + texto + "%'";
                     }
 
                     DefaultTableModel nm = new DefaultTableModel();

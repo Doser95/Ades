@@ -26,7 +26,7 @@ public class añadir_prod extends javax.swing.JInternalFrame {
         cb.addItem("");
         me.verificar_id();me.solo_numeros(c1);me.solo_numeros(c2);me.solo_numeros(c3);
         me.limitar_caracteres(c1, 3);me.limitar_caracteres(c2, 3);me.limitar_caracteres(c3, 4);
-        rc.tipos_productos_busqueda(cb);
+        rc.tipos_productos_busqueda_material(cb);
     }
     
     /** This method is called from within the constructor to

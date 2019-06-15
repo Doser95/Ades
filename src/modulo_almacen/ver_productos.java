@@ -31,23 +31,25 @@ public class ver_productos extends javax.swing.JInternalFrame {
 
     public ver_productos() {
         initComponents();
-        filtro_cb.addItem("Todo");
-        rc.tipos_productos_busqueda(filtro_cb);
         mostrar_tabla();
-        me.busqueda_al_escribir(texto_tb, tabla1, filtro_cb);
+        me.busqueda_al_escribir(texto_tb, tabla1, filtro_cb, tipo);
         tabla1.getColumnModel().getColumn(0).setPreferredWidth(500);
     }
 
     public void mostrar_tabla() {
         String query = "";
         DefaultTableModel nm = new DefaultTableModel();
-        if (tipo.getSelectedIndex() == 0) {
 
+        if (tipo.getSelectedIndex() == 1) {
+            query = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos";
+            filtro_cb.addItem("Todo");
+            rc.tipos_productos_busqueda_material(filtro_cb);
         } else {
-            if (tipo.getSelectedIndex() == 1) {
-                query = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos";
-            }
+            query = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos";
+            filtro_cb.addItem("Todo");
+            rc.tipos_productos_busqueda_medicamentos(filtro_cb);
         }
+
         nm.addColumn("Nombre del producto");
         nm.addColumn("Tipo");
         nm.addColumn("Clave");
@@ -116,7 +118,7 @@ public class ver_productos extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Tipo:");
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Material", "Medicamentos" }));
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Material", "Medicamentos" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,7 +132,7 @@ public class ver_productos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84)
+                        .addGap(144, 144, 144)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(filtro_cb, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,7 +152,7 @@ public class ver_productos extends javax.swing.JInternalFrame {
                     .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
