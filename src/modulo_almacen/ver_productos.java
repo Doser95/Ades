@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,23 +41,28 @@ public class ver_productos extends javax.swing.JInternalFrame {
         String query = "";
         DefaultTableModel nm = new DefaultTableModel();
 
-        if (tipo.getSelectedIndex() == 1) {
+        if (tipo.getSelectedIndex() == 0) {
             query = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos";
-            filtro_cb.addItem("Todo");
-            rc.tipos_productos_busqueda_material(filtro_cb);
-        } else {
-            query = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos";
-            filtro_cb.addItem("Todo");
-            rc.tipos_productos_busqueda_medicamentos(filtro_cb);
-        }
 
-        nm.addColumn("Nombre del producto");
-        nm.addColumn("Tipo");
-        nm.addColumn("Clave");
-        nm.addColumn("Stock minimo");
-        nm.addColumn("Existencia");
-        nm.addColumn("Stock maximo");
-        nm.addColumn("Localización");
+            nm.addColumn("Nombre del producto");
+            nm.addColumn("Tipo");
+            nm.addColumn("Clave");
+            nm.addColumn("Stock minimo");
+            nm.addColumn("Existencia");
+            nm.addColumn("Stock maximo");
+            nm.addColumn("Localización");
+
+        } else {
+            query = "select nombre, presentacion, clave, stock_minimo, existencia, stock_maximo, controlado from medicamentos";
+
+            nm.addColumn("Nombre del producto");
+            nm.addColumn("presentacion");
+            nm.addColumn("Clave");
+            nm.addColumn("Stock minimo");
+            nm.addColumn("Existencia");
+            nm.addColumn("Stock maximo");
+            nm.addColumn("controlado");
+        }
 
         tabla1.setModel(nm);
 
@@ -105,6 +111,12 @@ public class ver_productos extends javax.swing.JInternalFrame {
         setFrameIcon(null);
 
         jLabel2.setText("Buscar por:");
+
+        filtro_cb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                filtro_cbMouseEntered(evt);
+            }
+        });
 
         tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,6 +180,18 @@ public class ver_productos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void filtro_cbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filtro_cbMouseEntered
+        if (tipo.getSelectedIndex() == 0) {
+            filtro_cb.removeAllItems();
+            filtro_cb.addItem("Todo");
+            rc.tipos_productos_busqueda_material(filtro_cb);
+        } else {
+            filtro_cb.removeAllItems();
+            filtro_cb.addItem("Todo");
+            rc.tipos_productos_busqueda_medicamentos(filtro_cb);
+        }
+    }//GEN-LAST:event_filtro_cbMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

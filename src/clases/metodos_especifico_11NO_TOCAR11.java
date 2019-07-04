@@ -47,7 +47,7 @@ public class metodos_especifico_11NO_TOCAR11 {
             almacen al = new almacen();
             al.setLocationRelativeTo(null);
             al.setVisible(true);
-            
+
             al.n_usuario.setText(user.getText());
         } else {
             if (c == 2) {
@@ -57,7 +57,7 @@ public class metodos_especifico_11NO_TOCAR11 {
                     Ventanilla al = new Ventanilla();
                     al.setLocationRelativeTo(null);
                     al.setVisible(true);
-                    
+
                     al.n_usuario.setText(user.getText());
                 }
             }
@@ -110,7 +110,7 @@ public class metodos_especifico_11NO_TOCAR11 {
 
         int n1 = ver_productos.tabla1.getRowCount();
         String num = String.valueOf(n1 + 1);
-       
+
         añadir_prod.idLabel.setText(num);
 
     }
@@ -174,31 +174,71 @@ public class metodos_especifico_11NO_TOCAR11 {
             }
         });
     }
+
     //Busqueda al escribir
     //utilizando keyListener se realiza Query a db utilizando like '%example%'
     public void busqueda_al_escribir(JTextField cpm, JTable tb, JComboBox cb, JComboBox cv) {
         cpm.addKeyListener(new KeyAdapter() {
-            public void keyTyped(KeyEvent e) {
+            public void keyReleased(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (Character.isLetterOrDigit(c) || !Character.isLetterOrDigit(c)) {
-                    Integer comodin1 = cv.getSelectedIndex();
-                    String comodin2 = cb.getSelectedItem().toString();                
+                    Integer tipo = cv.getSelectedIndex();
+                    String comodin2 = cb.getSelectedItem().toString();
                     String code = null;
                     String texto = cpm.getText();
-                    if (comodin1 == 0  && comodin2.equalsIgnoreCase("Todo")) {
-                        code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where nombre_prod like '%" + texto + "%'";
-                    } else {
-                        code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where tipo = '" + comodin2 + "' and nombre_prod like '%" + texto + "%'";
-                    }
 
                     DefaultTableModel nm = new DefaultTableModel();
-                    nm.addColumn("Nombre del producto");
-                    nm.addColumn("Tipo");
-                    nm.addColumn("Clave");
-                    nm.addColumn("Stock minimo");
-                    nm.addColumn("Existencia");
-                    nm.addColumn("Stock maximo");
-                    nm.addColumn("Localización");
+                    if (tipo == 0 /*&& comodin2.equalsIgnoreCase("Todo")*/) {
+                        if (comodin2.equals("Todo")) {
+                            code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where nombre_prod like '%" + texto + "%'";
+                            nm.addColumn("Nombre del producto");
+                            nm.addColumn("Tipo");
+                            nm.addColumn("Clave");
+                            nm.addColumn("Stock minimo");
+                            nm.addColumn("Existencia");
+                            nm.addColumn("Stock maximo");
+                            nm.addColumn("Localización");
+
+                        } else {
+                            code = "select nombre_prod, TIPO, clave, stock_minimo, existencia, stock_maximo, localizacion from productos where TIPO = '" + comodin2 + "' and nombre_prod like '%" + texto + "%'";
+                            nm.addColumn("Nombre del producto");
+                            nm.addColumn("Tipo");
+                            nm.addColumn("Clave");
+                            nm.addColumn("Stock minimo");
+                            nm.addColumn("Existencia");
+                            nm.addColumn("Stock maximo");
+                            nm.addColumn("Localización");
+                        }
+                    } else {
+                        if (tipo == 1) {
+                            if (comodin2.equals("Todo")) {
+                                code = "select nombre, presentacion, clave, stock_minimo, existencia, stock_maximo, controlado from medicamentos where nombre like '%" + texto + "%'";
+                                nm.addColumn("Nombre del producto");
+                                nm.addColumn("presentacion");
+                                nm.addColumn("Clave");
+                                nm.addColumn("Stock minimo");
+                                nm.addColumn("Existencia");
+                                nm.addColumn("Stock maximo");
+                                nm.addColumn("controlado");
+                            } else {
+                                int ccc;
+                                if (comodin2.equals("No controlado")){
+                                    ccc = 0;
+                                }else{
+                                    ccc = 1;
+                                }
+                                code = "select nombre, presentacion, clave, stock_minimo, existencia, stock_maximo, controlado from medicamentos where controlado = " + ccc + " and nombre like '%" + texto + "%'";
+                                nm.addColumn("Nombre del producto");
+                                nm.addColumn("presentacion");
+                                nm.addColumn("Clave");
+                                nm.addColumn("Stock minimo");
+                                nm.addColumn("Existencia");
+                                nm.addColumn("Stock maximo");
+                                nm.addColumn("controlado");
+                            }
+                        }
+
+                    }
 
                     tb.setModel(nm);
 
@@ -242,29 +282,32 @@ public class metodos_especifico_11NO_TOCAR11 {
             System.out.println(c);
         }
     }
-    
+
     //ocultar forms
-      public void ocultar_forms(JPanel x){
-        x.addMouseListener(new MouseListener(){
+    public void ocultar_forms(JPanel x) {
+        x.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
-               Ventanilla.ip.dispose();
-               Ventanilla.vc.dispose();
+                Ventanilla.ip.dispose();
+                Ventanilla.vc.dispose();
             }
+
             @Override
             public void mousePressed(MouseEvent me) {
             }
+
             @Override
             public void mouseReleased(MouseEvent me) {
             }
+
             @Override
             public void mouseEntered(MouseEvent me) {
             }
+
             @Override
             public void mouseExited(MouseEvent me) {
             }
-        
+
         });
     }
 }
-

@@ -14,10 +14,10 @@ import javax.swing.JComboBox;
 public class rellenos_combobox {
     
     public void tipos_productos_busqueda_material (JComboBox cb){
-        
+      
         cb.addItem("Abatelenguas");
         cb.addItem("Aceites");
-        cb.addItem("Agujas Hipodermicas");
+        cb.addItem("Aguja Hipodermica");
         cb.addItem("Algodones");
         cb.addItem("Antisépticos y Germicidas");
         cb.addItem("Aplicadores");
@@ -53,7 +53,7 @@ public class rellenos_combobox {
         cb.addItem("Toallas");
         cb.addItem("Tubos");
         cb.addItem("Vendas");
-  
+    
     }
     
     public void tipos_productos_busqueda_medicamentos(JComboBox cb){
